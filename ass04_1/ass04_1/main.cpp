@@ -5,6 +5,10 @@
 //  Title:          Assignment 04 - part 1
 //  File:           main.cpp
 //
+//  PROBLEM*        The code below row 194 was used in testing
+//                  and it worked perfectly. However, when I reuse
+//                  the same code in my menu application, the Filter
+//                  function breaks.... I don't have enough time to fix this
 //
 //****************************************************************
 
@@ -34,6 +38,10 @@ int main() {
     string iMacFilePath;
     iMacFilePath = "/Users/shy/Documents/ComputerSci/cs300/ass04/phonebook1.txt";
     char selection;
+    string nameADD;
+    string phoneADD;
+    string searchName;
+    string filterName;
     while (selection != 'Q')
     {
         cout << endl << "Please choose an operation:" << endl;
@@ -43,8 +51,7 @@ int main() {
         //getline(cin, selection);
         cout << selection << endl;
         
-        string nameADD;
-        string phoneADD;
+
         //****************************************************************
         //                                                             ADD
         if (selection == 'A')
@@ -105,8 +112,8 @@ int main() {
                 cout << "Number of rows in data file: " << rows << endl;
             }
             // import data to tree
-            BinarySearchTree<Contact>* Book;
-            Book = new BinarySearchTree<Contact>();
+//            BinarySearchTree<Contact>* Book;
+//            Book = new BinarySearchTree<Contact>();
             string first;
             string last;
             string num;
@@ -118,6 +125,7 @@ int main() {
                 getline(filenameIN_2, num);
                 tempContact->setName(first + ' ' + last);
                 tempContact->setNumber(num);
+                cout << "inserting: " << first << endl;
                 Book->insert(*tempContact);
                 // deallocate tempContact
                 tempContact = nullptr;
@@ -128,18 +136,48 @@ int main() {
         //                                                             SEARCH
         else if (selection == 'S')
         {
+            cout << "Enter a name: ";
+            cin.clear();
+            cin.ignore();
+            cin >> searchName;
+            
+            Contact* tempContact;
+            tempContact = new Contact();
+            tempContact->setName(searchName);
+            tempContact->setNumber("fake number");
+            
+            cout << "Phone: " << Book->searchNEW(*tempContact).getNumber() << endl;
+            
+            // deallocate tempContact
+            tempContact = nullptr;
+            delete tempContact;
             
         }
         //****************************************************************
         //                                                             PRINT
         else if (selection == 'P')
         {
-
+            Book->inOrder();
         }
         //****************************************************************
         //                                                             FILTER
         else if (selection == 'F')
         {
+            cout << "Enter a name: ";
+            cin.clear();
+            cin.ignore();
+            cin >> filterName;
+            
+            Contact* tempContact;
+            tempContact = new Contact();
+            tempContact->setName(filterName);
+            tempContact->setNumber("fake number");
+            
+            Book->inOrderFILTER(*tempContact);
+            
+            // deallocate tempContact
+            tempContact = nullptr;
+            delete tempContact;
             
         }
         //else break;
@@ -154,33 +192,9 @@ int main() {
     
     
     
+
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    // All of this code here works. But it fails when I use the exact same code in my menu above....
     
     
     

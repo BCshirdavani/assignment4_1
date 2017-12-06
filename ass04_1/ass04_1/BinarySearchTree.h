@@ -41,6 +41,7 @@ private:
     int treeLeaveCount(node<T>*);
     void treeInsert(node<T>*&, T&);
     bool treeSearch(node<T>*, T&);
+    T treeSearchNEW(node<T>*, T&);       // NEW search, returns T data
     node<T>* findMax(node<T>*);
     void deleteNode(node<T>*&, T&);
     
@@ -56,6 +57,7 @@ public:
     int leaveCount(){return treeLeaveCount(root);}
     void insert(T& item){treeInsert(root, item);}
     bool search(T& item){return treeSearch(root,item);}
+    T searchNEW(T& item){return treeSearchNEW(root,item);}       // NEW search, returns T data
     //    void insert(T&); //non-recursive function call
     node<T>* findMax(){return findMax(root);}
     void deleteNode(T& item){deletenode(root, item);}
@@ -255,11 +257,25 @@ template <class T>
 bool BinarySearchTree<T>::treeSearch(node<T>* p, T& item){
     if(p == NULL)
         return false;
-    else if(item<p->data)
+    else if( item < p->data )
         return treeSearch(p->left, item);
-    else if(item>p->data)
+    else if( item > p->data )
         return treeSearch(p->right, item);
     return true;
+}
+
+//****************************************************************
+//                                                      treeSearch() NEW
+//                                                      return type T
+template <class T>
+T BinarySearchTree<T>::treeSearchNEW(node<T>* p, T& item){
+    if(p == NULL)
+        cout << "could not find this person";
+    else if( item < p->data )
+        return treeSearchNEW(p->left, item);
+    else if( item > p->data )
+        return treeSearchNEW(p->right, item);
+    return p->data;
 }
 
 //****************************************************************
